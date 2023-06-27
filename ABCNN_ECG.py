@@ -90,11 +90,11 @@ class CNN(nn.Module):
 
         self.fc = nn.Linear(1984, 200)
         self.out = nn.Linear(200, 5)
-        self.weight = Parameter(torch.Tensor(2, 32))
+        self.weight = Parameter(torch.Tensor(1, 240))
 
 
     def forward(self, x):
-
+        x = x * self.weight  # element-wise multiply by the weight. If the shape doesn't consistant, please transpose the variable.
         x = self.conv1(x)
         x = self.conv2(x)
         x = x.view(x.size(0), -1)
